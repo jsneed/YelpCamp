@@ -17,7 +17,11 @@ var campgroundRoutes = require("./routes/campgrounds"),
     commentRoutes    = require("./routes/comments"),
     indexRoutes      = require("./routes/index");
 
-mongoose.connect("mongodb://localhost/yelp_camp_v4");
+require("dotenv").config();
+
+var databaseURL = process.env.DATABASE_URL ? process.env.DATABASE_URL : "mongodb://localhost/yelp_camp";
+console.log("Database URL: " + databaseURL);
+mongoose.connect(databaseURL);
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended : true}));
